@@ -28,7 +28,7 @@ swipe.onswiped  = function_for_swiped;
 * dx : delta of X axis.
 * dy : delta of Y axis.
 * direction: 'right'|'left'|'up'|'down'|'point'
-** swiping to 'right' ... 'down' direction or not ('point').
+  * swiping to 'right' ... 'down' direction or not ('point').
 
 ### .onswiped
 
@@ -41,5 +41,4 @@ swipe.onswiped  = function_for_swiped;
 
 ## Thanks
 
-Swiper.js library is based upon swiping_detector.js
-https://github.com/mozilla-b2g/gaia/blob/master/apps/keyboard/js/views/swiping_detector.js
+Swiper.js library is based upon [swiping_detector.js](https://github.com/mozilla-b2g/gaia/blob/master/apps/keyboard/js/views/swiping_detector.js).

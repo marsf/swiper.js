@@ -1,8 +1,8 @@
 # Swiper.js
 
-A javascript library for the swipe detection of touch screen.
+A javascript library for the swipe/flick detection of touch screen.
 
-Current version is 0.2.5.
+Current version is 0.3.
 
 ## Functions
 
@@ -15,6 +15,9 @@ swipe.start();
 // Remove event listners.
 swipe.stop();
 
+// Define handling function of 'touchstart' event.
+swipe.ontouch = function_for_touch;
+
 // Define handling function of 'touchmove' event.
 swipe.onswiping = function_for_swiping;
 
@@ -24,21 +27,27 @@ swipe.onswiped  = function_for_swiped;
 
 ## Event properties
 
+### .ontouch
+
+* target : the target element.
+* startX : X coordinates of start point.
+* startY : Y coordinates of start point.
+
 ### .onswiping
 
-* target : target element.
+* target : the target element.
 * dx : delta of X axis.
 * dy : delta of Y axis.
 * direction: 'right'|'left'|'up'|'down'|'point'
-  * swiping to 'right' ... 'down' direction or not ('point').
+  * swiping to the direction ('right' ... 'down') or not ('point').
 
 ### .onswiped
 
-* target : target element.
+* target : the target element.
 * dx : delta pixels of X axis.
 * dy : delta pixels of Y axis.
 * angle : swiped angle.
-* length: swiped length.
+* length: distance of start point to end point.
 * direction: 'right'|'left'|'up'|'down'
 
 ## Thanks

@@ -1,5 +1,5 @@
 // Copyright (c) 2015, Masahiko Imanaka. All rights reserved.
-// Swiper.js version 0.2.5
+// Swiper.js version 0.3
 (function(exports) {
 'use strict';
 
@@ -9,6 +9,7 @@ function Swiper(elm) {
   this.targetElment = null;
 }
 
+Swiper.prototype.ontouch = null;
 Swiper.prototype.onswiping = null;
 Swiper.prototype.onswiped = null;
 
@@ -27,14 +28,20 @@ Swiper.prototype.stop = function () {
 Swiper.prototype.handleEvent = function (ev) {
   var touch,
       direction;
+
   switch(ev.type) {
     case 'touchstart':
       touch = ev.touches[0];
+      this.targetElment = ev.target;
       this.startX = touch.pageX;
       this.startY = touch.pageY;
       this.touchID = touch.identifier;
-      if (ev.target.id !== 'undefined') {
-        this.targetElment = ev.target;
+      if (typeof this.ontouch === 'function') {
+        this.ontouch({
+          target: this.targetElment,
+          startX: this.startX,
+          startY: this.startY
+        });
       }
       break;
 
@@ -54,7 +61,7 @@ Swiper.prototype.handleEvent = function (ev) {
           direction: direction
         });
       } else {
-        console.error('swiper: .onswiping function is not defined.');
+        //console.log('swiper: .onswiping function is not defined.');
       }
       //console.log('swiper: (touchmove)', direction, dx, dy);
       break;
@@ -80,7 +87,7 @@ Swiper.prototype.handleEvent = function (ev) {
           direction: direction
         });
       } else {
-        console.error('swiper: .onswiped function is not defined.');
+        //console.log('swiper: .onswiped function is not defined.');
       }
       //console.log('swiper: (touchend)', direction, dx, dy);
       break;

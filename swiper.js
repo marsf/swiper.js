@@ -1,12 +1,12 @@
 // Copyright (c) 2015, Masahiko Imanaka. All rights reserved.
-// Swiper.js version 0.2
+// Swiper.js version 0.2.5
 (function(exports) {
 'use strict';
 
 function Swiper(elm) {
   this.element = elm;
   this.startX = this.startY = null;
-  this.elmId = null;
+  this.targetElment = null;
 }
 
 Swiper.prototype.onswiping = null;
@@ -34,7 +34,7 @@ Swiper.prototype.handleEvent = function (ev) {
       this.startY = touch.pageY;
       this.touchID = touch.identifier;
       if (ev.target.id !== 'undefined') {
-        this.elmId = ev.target.id;
+        this.targetElment = ev.target;
       }
       break;
 
@@ -48,7 +48,7 @@ Swiper.prototype.handleEvent = function (ev) {
         dy = touch.pageY - this.startY;
         direction = _getSimple4Direction(dx, dy);
         this.onswiping({
-          id: this.elmId,
+          target: this.targetElment,
           dx: dx,
           dy: dy,
           direction: direction
@@ -72,7 +72,7 @@ Swiper.prototype.handleEvent = function (ev) {
         var angle = _getAngle(dx, dy);
         direction = _getDirection(angle);
         this.onswiped({
-          id: this.elmId,
+          target: this.targetElment,
           dx: dx,
           dy: dy,
           length: length,
@@ -110,12 +110,15 @@ function _getDirection(angle) {
 }
 
 function _getSimple4Direction(dx, dy) {
-  if (dx === 0 && dy === 0) {
+  var dx_abs = Math.abs(dx),
+      dy_abs = Math.abs(dy),
+      threshold = 2;
+  if (dx_abs < threshold && dy_abs < threshold) {
     return 'point';
   }
-  return (Math.abs(dx) >= Math.abs(dy)) ?
+  return (dx_abs >= dy_abs) ?
     ((dx > 0) ? 'right' : 'left') :
-    ((dy > 0) ? 'up' : 'down');
+    ((dy > 0) ? 'down' : 'up');
 }
 
 exports.Swiper = Swiper;

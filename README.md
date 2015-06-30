@@ -2,6 +2,8 @@
 
 A javascript library for the swipe detection of touch screen.
 
+Current version is 0.2.5.
+
 ## Functions
 
 ```
@@ -24,7 +26,7 @@ swipe.onswiped  = function_for_swiped;
 
 ### .onswiping
 
-* id : the element id.
+* target : target element.
 * dx : delta of X axis.
 * dy : delta of Y axis.
 * direction: 'right'|'left'|'up'|'down'|'point'
@@ -32,7 +34,7 @@ swipe.onswiped  = function_for_swiped;
 
 ### .onswiped
 
-* id : the element id.
+* target : target element.
 * dx : delta pixels of X axis.
 * dy : delta pixels of Y axis.
 * angle : swiped angle.
